@@ -6,5 +6,14 @@ export interface MealAPI {
     strInstructions:string,
     strMealThumb:string,
     strYoutube:string,
-    
+
+}
+
+export interface WishlistRecipe{
+    id:string,
+    name:string,
+    category:string,
+    thumbnail:string,
+    cooked:boolean,
+    addedAt:string
 }
