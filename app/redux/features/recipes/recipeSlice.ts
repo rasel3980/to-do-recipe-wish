@@ -1,31 +1,44 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { MealAPI, RecipeState } from '@/app/types/recipe'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-export interface CounterState {
-  value: number
+export const fetchRecipe = createAsyncThunk(
+    "recipes/fetchRecipes",
+    async()=>{
+        const res = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+        const data = await res.json();
+        return data.meals as MealAPI[]
+    }
+)
+
+const initialState: RecipeState = {
+  wishlist:[],
+  loading:false,
+  error:null
 }
 
-const initialState: CounterState = {
-  value: 0,
+extraReducers:(builder)=>{
+    builder
+    .addCase(fetchRecipe.pending,(state)=>{
+        state.loading = true:
+        state.error = null;
+    })
+    .addCase(fetchRecipe.fulfilled,(state,action)=>{
+        state.loading = false;
+        state.meals = action.payload
+    })
+    .addCase(fetchRecipe.rejected,(state)=>{
+        state.loading = false;
+        state.error = "Sorry cannot load recipe"
+    })
 }
-
-export const counterSlice = createSlice({
-  name: 'counter',
+export const recipeSlice = createSlice({
+  name: 'recipes',
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1
-    },
-    decrement: (state) => {
-      state.value -= 1
-    },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload
-    },
-  },
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = counterSlice.actions
+export const {  } = recipeSlice.actions
 
-export default counterSlice.reducer
+export default recipeSlice.reducer
