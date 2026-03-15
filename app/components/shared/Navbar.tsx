@@ -1,14 +1,15 @@
-import Link from 'next/link';
+
 import React from 'react';
 
 const Navbar: React.FC = () => {
-    const navLinks = <div className='flex justify-center items-center gap-3 font-bold text-lg'>
-        <Link href={'/'}>Home</Link>
-        <Link href={'/about'}>About</Link>
-        <Link href={'/contact'}>Contact</Link>
-    </div>
+    const navLinks = 
+        <ul className='flex justify-center items-center gap-3 font-bold text-lg'>
+            <li className='border rounded-md'><input type="text" placeholder='Search here' /></li>
+            <li>Total:</li>
+            <li>Cooked:</li>
+        </ul>
     return (
-        <div className="navbar bg-base-100 shadow-sm">
+        <div className="navbar bg-base-100 px-10 shadow-sm">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -20,15 +21,12 @@ const Navbar: React.FC = () => {
         {navLinks}
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl">To_Do</a>
+    <a className="btn btn-ghost text-3xl font-bold">Recipe_Wishlist</a>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
       {navLinks}
     </ul>
-  </div>
-  <div className="navbar-end">
-    <button>Login</button>
   </div>
 </div>
     );
