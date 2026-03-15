@@ -17,3 +17,9 @@ export interface WishlistRecipe{
     cooked:boolean,
     addedAt:string
 }
+
+export interface RecipeState{
+    wishlist:WishlistRecipe[],
+    loading:boolean,
+    error:string | null
+}
