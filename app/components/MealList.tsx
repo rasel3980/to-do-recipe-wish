@@ -1,8 +1,8 @@
 "use client";
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
-import { fetchRecipe } from "@/app/features/recipes/recipesSlice";
 import MealCard from "./MealCard";
+import { useAppDispatch, useAppSelector } from "../redux/store/hooks";
+import { fetchRecipe } from "../redux/features/recipes/recipeSlice";
 
 const MealList = () => {
   const dispatch = useAppDispatch();
