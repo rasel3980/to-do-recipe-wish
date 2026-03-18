@@ -27,6 +27,15 @@ export const recipeSlice = createSlice({
         addToWishlist: (state, action: PayloadAction<WishlistRecipe>) => {
             state.wishlist.push(action.payload);
         },
+        removeFromWishlist: (state, action: PayloadAction<string>) => {
+        state.wishlist = state.wishlist.filter(
+            (item) => item.id !== action.payload
+        );
+    },
+    toggleCooked: (state, action: PayloadAction<string>) => {
+        const item = state.wishlist.find((r) => r.id === action.payload);
+        if (item) item.cooked = !item.cooked;
+    },
     },                           
     extraReducers: (builder) => {
         builder
