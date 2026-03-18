@@ -1,5 +1,6 @@
-import { MealAPI, RecipeState } from '@/app/types/recipe'
+import { MealAPI, RecipeState, WishlistRecipe } from '@/app/types/recipe'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
 
 export const fetchRecipe = createAsyncThunk(
     "recipes/fetchRecipes",
@@ -22,7 +23,11 @@ const initialState: RecipeState = {
 export const recipeSlice = createSlice({
     name: 'recipes',
     initialState,
-    reducers: {},
+    reducers: {
+        addToWishlist: (state, action: PayloadAction<WishlistRecipe>) => {
+            state.wishlist.push(action.payload);
+        },
+    },                           
     extraReducers: (builder) => {
         builder
             .addCase(fetchRecipe.pending, (state) => {
@@ -40,4 +45,5 @@ export const recipeSlice = createSlice({
     },
 })
 
+export const { addToWishlist } = recipeSlice.actions 
 export default recipeSlice.reducer
