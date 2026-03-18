@@ -54,5 +54,5 @@ export const recipeSlice = createSlice({
     },
 })
 
-export const { addToWishlist } = recipeSlice.actions 
+export const { addToWishlist , removeFromWishlist , toggleCooked} = recipeSlice.actions 
 export default recipeSlice.reducer

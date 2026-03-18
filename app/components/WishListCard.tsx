@@ -1,12 +1,15 @@
 "use client";
 import { WishlistRecipe } from "@/app/types/recipe";
 import Image from "next/image";
+import { useAppDispatch } from "../redux/store/hooks";
+import { removeFromWishlist, toggleCooked } from "../redux/features/recipes/recipeSlice";
 
 interface WishlistCardProps {
   recipe: WishlistRecipe;
 }
 
 const WishlistCard = ({ recipe }: WishlistCardProps) => {
+  const dispatch = useAppDispatch();
 
   return (
     <div className={`border rounded-lg overflow-hidden shadow-md ${
@@ -23,6 +26,7 @@ const WishlistCard = ({ recipe }: WishlistCardProps) => {
         <h2 className="text-lg font-bold">{recipe.name}</h2>
         <p className="text-sm text-gray-500">{recipe.category}</p>
         <button
+          onClick={() => dispatch(toggleCooked(recipe.id))}
           className={`mt-3 w-full py-2 rounded-lg ${
             recipe.cooked
               ? "bg-green-500 text-white"
@@ -32,6 +36,7 @@ const WishlistCard = ({ recipe }: WishlistCardProps) => {
           {recipe.cooked ? "✅ Cooked" : "Mark as Cooked"}
         </button>
         <button
+          onClick={() => dispatch(removeFromWishlist(recipe.id))}
           className="mt-2 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600"
         >
           🗑️ Remove
