@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import WishListCard from "../components/WishListCard";
 import { useAppSelector } from "../redux/store/hooks";
 
@@ -12,6 +13,7 @@ export default function WishlistPage() {
         <p className="text-gray-500 mt-2">
          Recipe add from Homne
         </p>
+        <Link href={'/'}><button className="btn mt-4 bg-blue-500 text-white">Back to Home</button></Link>
       </div>
     );
   }

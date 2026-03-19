@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
             {navLinks}
           </ul>
         </div>
-        <a className="btn btn-ghost text-3xl font-bold">Recipe_Wishlist</a>
+        <Link href={'/'} className="btn btn-ghost text-3xl font-bold">Recipe_Wishlist</Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
