@@ -1,21 +1,27 @@
 "use client";
 import React from 'react';
 import Link from 'next/link';
-import { useAppSelector } from '@/app/redux/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/app/redux/store/hooks';
+import { setSearchQuery } from '@/app/redux/features/recipes/recipeSlice';
 
 const Navbar: React.FC = () => {
+  const dispatch = useAppDispatch();
   const wishlist = useAppSelector((state) => state.recipes.wishlist);
+  const searchQuery = useAppSelector((state) => state.recipes.searchQuery);
+  console.log(searchQuery);
 
   const navLinks =
     <ul className='flex justify-center items-center gap-3 font-bold text-lg'>
       <li className='border rounded-md'>
-        <input type="text" placeholder='Search here' />
+        <input
+          type="text"
+          placeholder='Search here'
+          value={searchQuery}
+          onChange={(e) => dispatch(setSearchQuery(e.target.value))}
+          className="p-2 outline-none"
+        />
       </li>
-      <li>
-        <Link href="/wishList">
-          ❤️ Wishlist ({wishlist.length})
-        </Link>
-      </li>
+      <li><Link href="/wishlist">❤️ Wishlist ({wishlist.length})</Link></li>
     </ul>
 
   return (
@@ -31,7 +37,7 @@ const Navbar: React.FC = () => {
             {navLinks}
           </ul>
         </div>
-        <Link href={'/'} className="btn btn-ghost text-3xl font-bold">Recipe_Wishlist</Link>
+        <a className="btn btn-ghost text-3xl font-bold">🍽️ Recipe_Wishlist</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">

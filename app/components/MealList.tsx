@@ -6,13 +6,16 @@ import { fetchRecipe } from "../redux/features/recipes/recipeSlice";
 
 const MealList = () => {
   const dispatch = useAppDispatch();
-  const { meals, loading, error } = useAppSelector(
+  const { meals, loading, error, searchQuery } = useAppSelector(
     (state) => state.recipes
   );
 
   useEffect(() => {
     dispatch(fetchRecipe());
   }, [dispatch]);
+  const filteredMeals = meals.filter((meal) =>
+    meal.strMeal.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   if (loading) {
     return (
@@ -32,7 +35,7 @@ const MealList = () => {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
-      {meals.map((meal) => (
+      {filteredMeals.map((meal) => (
         <MealCard key={meal.idMeal} meal={meal} />
       ))}
     </div>
