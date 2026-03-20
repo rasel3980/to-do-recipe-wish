@@ -17,7 +17,8 @@ const initialState: RecipeState = {
     meals: [],
     wishlist: [],
     loading: false,
-    error: null
+    error: null,
+    searchQuery: '',
 }
 
 export const recipeSlice = createSlice({
@@ -36,6 +37,9 @@ export const recipeSlice = createSlice({
         const item = state.wishlist.find((r) => r.id === action.payload);
         if (item) item.cooked = !item.cooked;
     },
+    setSearchQuery: (state, action: PayloadAction<string>) => {
+    state.searchQuery = action.payload;
+},
     },                           
     extraReducers: (builder) => {
         builder

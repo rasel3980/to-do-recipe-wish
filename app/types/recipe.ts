@@ -22,5 +22,6 @@ export interface RecipeState{
     meals: MealAPI[];
     wishlist:WishlistRecipe[],
     loading:boolean,
-    error:string | null
+    error:string | null,
+    searchQuery: string,
 }
